@@ -147,10 +147,25 @@ describe('/api/jokes router', () => {
       expect(res.body).toMatchObject(jokes);
     });
 
-    it('responds correctly without jokes without token', async () => {
+    it('responds correctly with message without token', async () => {
       const res = await request(server)
             .get('/api/jokes');
       expect(res.body.message).toBe('token required');
+    });
+
+    it('responds correctly with message with invalid token', async () => {
+      const {body: {token}} = await request(server)
+            .post('/api/auth/login')
+            .send({
+              username: 'test',
+              password: '1234'
+            });
+
+      const badToken = token.substring(0, 5) + 'a' + token.substring(6);
+      const res = await request(server)
+            .get('/api/jokes')
+            .set({ Authorization: badToken });
+      expect(res.body.message).toBe('token invalid');
     });
 
     it('only responds when valid token is given', async () => {
