@@ -4,7 +4,7 @@ const server = require('./server');
 const request = require('supertest');
 
 test('sanity', () => {
-  expect(true).toBe(false);
+  expect(true).toBe(true);
 });
 
 beforeAll(async () => {

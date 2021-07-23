@@ -9,7 +9,7 @@ router.post('/register', (req, res) => {
   };
   Users.add(user)
     .then(newUser => {
-      res.end('implement register, please!');
+      res.status(201).json(newUser);
     })
     .catch(err => {
       res.status(500).json(err);
