@@ -4,10 +4,11 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = require('./secrets');
 const Users = require('./model');
 const {
-  validateBody
+  validateBody,
+  usernameFree
 } = require('./middleware');
 
-router.post('/register', validateBody, (req, res) => {
+router.post('/register', validateBody, usernameFree, (req, res) => {
   const user = {
     username: req.body.username,
     password: bcrypt.hashSync(req.body.password, 8)
