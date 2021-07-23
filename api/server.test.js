@@ -26,6 +26,7 @@ afterAll(async () => {
 describe('/api/auth router', () => {
 
   describe('[POST] /register', () => {
+
     it('adds new user to db', async () => {
       const before = await db('users');
       expect(before).toMatchObject([]);
@@ -42,6 +43,7 @@ describe('/api/auth router', () => {
         }
       ]);
     });
+
     it('responds with status 201', async () => {
       const res = await request(server)
             .post('/api/auth/register')
@@ -51,7 +53,20 @@ describe('/api/auth router', () => {
             });
       expect(res.status).toBe(201);
     });
-    it.todo('responds with newly created user');
+
+    it('responds with newly created user', async () => {
+      const res = await request(server)
+            .post('/api/auth/register')
+            .send({
+              username: 'test3',
+              password: '1234'
+            });
+      expect(res.body).toMatchObject({
+        id: 3,
+        username: 'test3'
+      });
+    });
+
   });
 
   // theres no seeds so testing login requires a functional register endpoint
