@@ -11,9 +11,6 @@ beforeAll(async () => {
   await db.migrate.rollback();
   await db.migrate.latest();
 });
-beforeEach(async () => {
-  await db.seeds.run();
-});
 afterAll(async () => {
   await db.destroy();
 });
@@ -21,7 +18,10 @@ afterAll(async () => {
 describe('/api/auth router', () => {
 
   describe('[POST] /register', () => {
-    it.todo('adds new user to db');
+    it('adds new user to db', async () => {
+      const before = await db('users');
+      console.log('before: ', before);
+    });
     it.todo('responds with correct status');
     it.todo('responds with newly created user');
   });
