@@ -11,7 +11,9 @@ router.post('/register', (req, res) => {
     .then(newUser => {
       res.end('implement register, please!');
     })
-    .catch(next);
+    .catch(err => {
+      res.status(500).json(err);
+    });
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.

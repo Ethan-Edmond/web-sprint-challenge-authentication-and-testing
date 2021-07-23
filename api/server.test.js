@@ -11,6 +11,14 @@ beforeAll(async () => {
   await db.migrate.rollback();
   await db.migrate.latest();
 });
+// beforeEach(async () => {
+//   await db('users').truncate();
+//   await db('users')
+//     .insert({
+//       username: 'test',
+//       password: "$2a$08$5KgcHu8JBpWvdtuB3JC7aOwbMHeGfd.36ya0rd8nFqI2p42NPCiDK" // 1234 after bcryption
+//     });
+// });
 afterAll(async () => {
   await db.destroy();
 });
@@ -34,7 +42,8 @@ describe('/api/auth router', () => {
         }
       ]);
     });
-    it.todo('responds with correct status');
+    it('responds with correct status', async () => {
+    });
     it.todo('responds with newly created user');
   });
 
