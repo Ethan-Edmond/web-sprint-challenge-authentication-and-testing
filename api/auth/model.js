@@ -9,3 +9,9 @@ exports.add = function ({username, password}) {
         .first();
     });
 };
+
+exports.getByUsername = function (username) {
+  return db('users')
+    .where({username})
+    .first();
+};
