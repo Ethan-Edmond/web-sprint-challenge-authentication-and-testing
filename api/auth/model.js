@@ -5,6 +5,7 @@ exports.add = function ({username, password}) {
     .insert({username, password})
     .then(id => {
       return db('users')
-        .where({id});
+        .where({id})
+        .first();
     });
 };
