@@ -86,7 +86,19 @@ describe('/api/auth router', () => {
       expect(after).toMatchObject(before);
     });
 
-    it.todo('returns token');
+    it('returns token', async () => {
+      const res = await request(server)
+            .post('/api/auth/login')
+            .send({
+              username: 'test',
+              password: '1234'
+            });
+      const decoded = jwt.decode(res.body.token);
+      expect(decoded).toMatchObject({
+        id: 1,
+        username: 'test',
+      });
+    });
 
     it.todo('responds with correct status');
 
