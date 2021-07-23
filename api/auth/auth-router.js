@@ -47,7 +47,7 @@ router.post('/register', validateBody, usernameFree, (req, res) => {
   */
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', validateBody, (req, res) => {
   Users.getByUsername(req.body.username)
     .then(user => {
       const passValid = bcrypt.compareSync(req.body.password, user.password);
