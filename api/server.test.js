@@ -130,6 +130,25 @@ describe('/api/auth router', () => {
       expect(res.body.message).toBe('username and password required');
     });
 
+    it('responds with a 400 and a message when username doesnt exist or password incorrect', async () => {
+      let res = await request(server)
+          .post('/api/auth/login')
+          .send({
+            username: 'test150',
+            password: '1234'
+          });
+      expect(res.status).toBe(400);
+      expect(res.body.message).toBe('invalid credentials');
+      res = await request(server)
+        .post('/api/auth/login')
+        .send({
+          username: 'test',
+          password: '1235'
+        });
+      expect(res.status).toBe(400);
+      expect(res.body.message).toBe('invalid credentials');
+    });
+
     it('returns token', async () => {
       const res = await request(server)
             .post('/api/auth/login')
