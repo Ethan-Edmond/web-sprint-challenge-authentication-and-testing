@@ -100,7 +100,15 @@ describe('/api/auth router', () => {
       });
     });
 
-    it.todo('responds with correct status');
+    it('responds with correct status', async () => {
+      const res = await request(server)
+            .post('/api/auth/login')
+            .send({
+              username: 'test',
+              password: '1234'
+            });
+      expect(res.status).toBe(200);
+    });
 
   });
 
