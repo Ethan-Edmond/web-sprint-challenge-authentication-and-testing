@@ -161,8 +161,6 @@ describe('/api/jokes router', () => {
               password: '1234'
             });
 
-      console.log('token:', token);
-      console.log('token.length:', token.length);
       const res = await request(server)
             .get('/api/jokes')
             .set({ Authorization: token });
