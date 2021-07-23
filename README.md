@@ -50,10 +50,10 @@ Your finished project must include all of the following requirements (further in
 
 ## Submission format
 
-- [ ] Submit via Codegrade by committing and pushing any new changes.
-- [ ] Create a pull request to merge `<firstName-lastName>` branch into `main`.
-- [ ] Please don't merge your own pull request and make sure **you are on your own repo**.
-- [ ] Check Codegrade for automated feedback.
+- [x] Submit via Codegrade by committing and pushing any new changes.
+- [x] Create a pull request to merge `<firstName-lastName>` branch into `main`.
+- [x] Please don't merge your own pull request and make sure **you are on your own repo**.
+- [x] Check Codegrade for automated feedback.
 - [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
 - [ ] Any changes pushed after the deadline will not receive any feedback.
 
@@ -63,11 +63,16 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
 
-Sessions are kept track of in the server, jwts are issued by the server but kept track in the client.
+The big difference is where the data is. With sessions it's on the server and
+the sessionid is given to the client. With tokens the whole thing is given to
+the client after being encrypted.
 
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
 
-Hashes them so we're not keeping the passwords in plain text anywhere.
+Hashes them so we're not keeping the passwords in plain text anywhere. One thing
+that is a little worrying to me is that there is still a plain text password in
+the request to login or register. Maybe with https this isn't the problem that I
+think it is.
 
 3. How are unit tests different from integration and end-to-end testing?
 
@@ -78,4 +83,8 @@ tolerable level.
 
 4. How does _Test Driven Development_ change the way we write applications and tests?
 
-writing tests first, then writing code to pass that test is the biggest change between tdd and usual.
+Writing tests first, then writing code to pass that test is the biggest change
+between tdd and usual. Next is where you are planning out the application. TDD
+leaves you doing a lot of planning while writing tests. The last thing I can
+think of is that TDD doesn't work if you're code isn't testable, so if you're
+doing TDD you have to code testably.
