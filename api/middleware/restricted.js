@@ -5,7 +5,15 @@ module.exports = (req, res, next) => {
   const token = req.headers.authorization;
 
   if (token) {
-    next();
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+      if (err) {
+        res.status(400).json({
+          message: 'token invalid'
+        });
+      } else {
+        next();
+      }
+    });
   } else {
     res.status(400).json({
       message: 'token required'
