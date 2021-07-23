@@ -23,9 +23,21 @@ describe('/api/auth router', () => {
   describe('[POST] /register', () => {
 
     it('responds with a 400 and a message when missing username or body', async () => {
-      const res = await request(server)
+      let res = await request(server)
             .post('/api/auth/register')
             .send({});
+      expect(res.status).toBe(400);
+      res = await request(server)
+            .post('/api/auth/register')
+        .send({
+          username: 'test'
+        });
+      expect(res.status).toBe(400);
+      res = await request(server)
+            .post('/api/auth/register')
+        .send({
+          password: '1234'
+        });
       expect(res.status).toBe(400);
     });
 
