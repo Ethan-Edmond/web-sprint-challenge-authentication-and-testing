@@ -71,8 +71,23 @@ describe('/api/auth router', () => {
 
   // theres no seeds so testing login requires a functional register endpoint
   describe('[POST] /login', () => {
+
+    it("doesn't effect db", async () => {
+      const before = await db('users');
+      await request(server)
+        .post('/api/auth/login')
+        .send({
+          username: 'test',
+          password: '1234'
+        });
+      const after = await db('users');
+      expect(after).toMatchObject(before);
+    });
+
     it.todo('returns token');
+
     it.todo('responds with correct status');
+
   });
 
 });
