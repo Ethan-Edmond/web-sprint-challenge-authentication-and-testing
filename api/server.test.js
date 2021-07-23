@@ -22,6 +22,13 @@ describe('/api/auth router', () => {
 
   describe('[POST] /register', () => {
 
+    it('responds with a 400 and a message when missing username or body', async () => {
+      const res = await request(server)
+            .post('/api/auth/register')
+            .send({});
+      expect(res.status).toBe(400);
+    });
+
     it('adds new user to db', async () => {
       const before = await db('users');
       expect(before).toMatchObject([]);
