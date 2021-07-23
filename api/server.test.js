@@ -42,7 +42,14 @@ describe('/api/auth router', () => {
         }
       ]);
     });
-    it('responds with correct status', async () => {
+    it('responds with status 201', async () => {
+      const res = await request(server)
+            .post('/api/auth/register')
+            .send({
+              username: 'test2',
+              password: '1234'
+            });
+      expect(res.status).toBe(201);
     });
     it.todo('responds with newly created user');
   });
