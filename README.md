@@ -10,11 +10,11 @@ You are not allowed to collaborate during the sprint challenge.
 
 ## Project Setup
 
-- [ ] Fork and clone the repo. Delete your old fork from Github first if you are repeating this Unit.
-- [ ] Open the assignment in Canvas and click on the "Set up git" option.
-- [ ] Follow instructions to set up Codegrade's Webhook and Deploy Key.
-- [ ] Make a commit and push it to Github.
-- [ ] Check to see that Codegrade has accepted your git submission.
+- [x] Fork and clone the repo. Delete your old fork from Github first if you are repeating this Unit.
+- [x] Open the assignment in Canvas and click on the "Set up git" option.
+- [x] Follow instructions to set up Codegrade's Webhook and Deploy Key.
+- [x] Make a commit and push it to Github.
+- [x] Check to see that Codegrade has accepted your git submission.
 
 For a step-by-step on setting up Codegrade see [this guide.](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374)
 
@@ -32,9 +32,9 @@ We will hash the user's password using `bcryptjs`, and use JSON Web Tokens and t
 
 Your finished project must include all of the following requirements (further instructions are found inside each file):
 
-- [ ] An authentication workflow with functionality for account creation and login, implemented inside `api/auth/auth-router.js`.
-- [ ] Middleware used to restrict access to resources from non-authenticated requests, implemented inside `api/middleware/restricted.js`.
-- [ ] A minimum of 2 tests per API endpoint, written inside `api/server.test.js`.
+- [x] An authentication workflow with functionality for account creation and login, implemented inside `api/auth/auth-router.js`.
+- [x] Middleware used to restrict access to resources from non-authenticated requests, implemented inside `api/middleware/restricted.js`.
+- [x] A minimum of 2 tests per API endpoint, written inside `api/server.test.js`.
 
 **IMPORTANT Notes:**
 
@@ -50,10 +50,10 @@ Your finished project must include all of the following requirements (further in
 
 ## Submission format
 
-- [ ] Submit via Codegrade by committing and pushing any new changes.
-- [ ] Create a pull request to merge `<firstName-lastName>` branch into `main`.
-- [ ] Please don't merge your own pull request and make sure **you are on your own repo**.
-- [ ] Check Codegrade for automated feedback.
+- [x] Submit via Codegrade by committing and pushing any new changes.
+- [x] Create a pull request to merge `<firstName-lastName>` branch into `main`.
+- [x] Please don't merge your own pull request and make sure **you are on your own repo**.
+- [x] Check Codegrade for automated feedback.
 - [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
 - [ ] Any changes pushed after the deadline will not receive any feedback.
 
@@ -62,6 +62,29 @@ Your finished project must include all of the following requirements (further in
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
+
+The big difference is where the data is. With sessions it's on the server and
+the sessionid is given to the client. With tokens the whole thing is given to
+the client after being encrypted.
+
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
+
+Hashes them so we're not keeping the passwords in plain text anywhere. One thing
+that is a little worrying to me is that there is still a plain text password in
+the request to login or register. Maybe with https this isn't the problem that I
+think it is.
+
 3. How are unit tests different from integration and end-to-end testing?
+
+Unit tests just test individual functions or classes. Ideally there would be
+some kind of atomic metaphor we could use, but because we could technically make
+our whole apps in one function, this kinda just means testing on the smallest
+tolerable level.
+
 4. How does _Test Driven Development_ change the way we write applications and tests?
+
+Writing tests first, then writing code to pass that test is the biggest change
+between tdd and usual. Next is where you are planning out the application. TDD
+leaves you doing a lot of planning while writing tests. The last thing I can
+think of is that TDD doesn't work if you're code isn't testable, so if you're
+doing TDD you have to code testably.
