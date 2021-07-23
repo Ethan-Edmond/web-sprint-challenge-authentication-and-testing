@@ -24,21 +24,22 @@ describe('/api/auth router', () => {
 
     it('responds with a 400 and a message when missing username or body', async () => {
       let res = await request(server)
-            .post('/api/auth/register')
-            .send({});
+          .post('/api/auth/register')
+          .send({});
       expect(res.status).toBe(400);
       res = await request(server)
-            .post('/api/auth/register')
+        .post('/api/auth/register')
         .send({
           username: 'test'
         });
       expect(res.status).toBe(400);
       res = await request(server)
-            .post('/api/auth/register')
+        .post('/api/auth/register')
         .send({
           password: '1234'
         });
       expect(res.status).toBe(400);
+      expect(res.body.message).toBe('username and password required');
     });
 
     it('adds new user to db', async () => {
@@ -56,6 +57,17 @@ describe('/api/auth router', () => {
           username: 'test'
         }
       ]);
+    });
+
+    it('responds with a 400 and a message when username is taken', async () => {
+      let res = await request(server)
+          .post('/api/auth/register')
+          .send({
+            username: 'test',
+            password: '1234'
+          });
+      expect(res.status).toBe(400);
+      expect(res.body.message).toBe('username taken');
     });
 
     it('responds with status 201', async () => {

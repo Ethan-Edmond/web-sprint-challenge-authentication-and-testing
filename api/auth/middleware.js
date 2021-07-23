@@ -4,7 +4,9 @@ exports.validateBody = (req, res, next) => {
     next();
   } else {
     res.status(400).json({
-      message: 'Please provide username and password'
+      message: 'username and password required'
     });
   }
 };
+
+exports.usernameFree = (req, res, next) => {};
