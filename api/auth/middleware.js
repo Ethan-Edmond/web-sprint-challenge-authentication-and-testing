@@ -26,3 +26,19 @@ exports.usernameFree = (req, res, next) => {
       res.status(500).json(err);
     });
 };
+
+exports.usernameExists = (req, res, next) => {
+  Users.getByUsername(req.body.username)
+    .then(user => {
+      if (user) {
+        next();
+      } else {
+        res.status(400).json({
+          message: 'invalid credentials'
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+};

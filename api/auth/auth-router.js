@@ -5,7 +5,8 @@ const JWT_SECRET = require('./secrets');
 const Users = require('./model');
 const {
   validateBody,
-  usernameFree
+  usernameFree,
+  usernameExists
 } = require('./middleware');
 
 router.post('/register', validateBody, usernameFree, (req, res) => {
@@ -47,7 +48,7 @@ router.post('/register', validateBody, usernameFree, (req, res) => {
   */
 });
 
-router.post('/login', validateBody, (req, res) => {
+router.post('/login', validateBody, usernameExists, (req, res) => {
   Users.getByUsername(req.body.username)
     .then(user => {
       const passValid = bcrypt.compareSync(req.body.password, user.password);
