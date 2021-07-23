@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const db = require('../data/dbConfig');
 const server = require('./server');
+const jokes = require('./jokes/jokes-data');
 
 test('sanity', () => {
   expect(true).toBe(true);
@@ -117,6 +118,7 @@ describe('/api/auth router', () => {
 describe('/api/jokes router', () => {
 
   describe('[GET] /', () => {
+
     it('responds with correct status', async () => {
       const {body: {token}} = await request(server)
             .post('/api/auth/login')
@@ -124,12 +126,27 @@ describe('/api/jokes router', () => {
               username: 'test',
               password: '1234'
             });
+
       const res = await request(server)
             .get('/api/jokes')
             .set({ Authorization: token });
       expect(res.status).toBe(200);
     });
-    it.todo('responds with dad jokes');
+
+    it('responds with dad jokes', async () => {
+      const {body: {token}} = await request(server)
+            .post('/api/auth/login')
+            .send({
+              username: 'test',
+              password: '1234'
+            });
+
+      const res = await request(server)
+            .get('/api/jokes')
+            .set({ Authorization: token });
+      expect(res.body).toMatchObject(jokes);
+    });
+
     it.todo('only responds when valid token is given');
   });
 
