@@ -1,6 +1,11 @@
 const router = require('express').Router();
+const Users = require('./model');
 
 router.post('/register', (req, res) => {
+  // const user = {
+  //   username: req.body.username,
+  //   password: bcrypt.hashSync(req.body.password, 8);
+  // }
   res.end('implement register, please!');
   /*
     IMPLEMENT

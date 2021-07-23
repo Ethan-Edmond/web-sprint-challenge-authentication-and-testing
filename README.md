@@ -63,15 +63,15 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
 
-sessions are kept track of in the server, jwts are issued by the server but ket track in the client.
+Sessions are kept track of in the server, jwts are issued by the server but kept track in the client.
 
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
 
-hashes them so we're not keeping the passwords in plain text anywhere.
+Hashes them so we're not keeping the passwords in plain text anywhere.
 
 3. How are unit tests different from integration and end-to-end testing?
 
-unit tests just test individual functions or classes. Ideally there would be
+Unit tests just test individual functions or classes. Ideally there would be
 some kind of atomic metaphor we could use, but because we could technically make
 our whole apps in one function, this kinda just means testing on the smallest
 tolerable level.
