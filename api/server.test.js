@@ -14,14 +14,6 @@ beforeAll(async () => {
   await db.migrate.rollback();
   await db.migrate.latest();
 });
-// beforeEach(async () => {
-//   await db('users').truncate();
-//   await db('users')
-//     .insert({
-//       username: 'test',
-//       password: "$2a$08$5KgcHu8JBpWvdtuB3JC7aOwbMHeGfd.36ya0rd8nFqI2p42NPCiDK" // 1234 after bcryption
-//     });
-// });
 afterAll(async () => {
   await db.destroy();
 });
@@ -119,7 +111,7 @@ describe('/api/jokes router', () => {
 
   describe('[GET] /', () => {
 
-    it('responds with correct status', async () => {
+    it('responds with correct status when given valid token', async () => {
       const {body: {token}} = await request(server)
             .post('/api/auth/login')
             .send({
@@ -133,7 +125,7 @@ describe('/api/jokes router', () => {
       expect(res.status).toBe(200);
     });
 
-    it('responds with dad jokes', async () => {
+    it('responds with dad jokes when given valid token', async () => {
       const {body: {token}} = await request(server)
             .post('/api/auth/login')
             .send({
@@ -168,18 +160,5 @@ describe('/api/jokes router', () => {
       expect(res.body.message).toBe('token invalid');
     });
 
-    it('only responds when valid token is given', async () => {
-      const {body: {token}} = await request(server)
-            .post('/api/auth/login')
-            .send({
-              username: 'test',
-              password: '1234'
-            });
-
-      const res = await request(server)
-            .get('/api/jokes')
-            .set({ Authorization: token });
-    });
   });
-
 });
