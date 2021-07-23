@@ -110,6 +110,26 @@ describe('/api/auth router', () => {
       expect(after).toMatchObject(before);
     });
 
+    it('responds with a 400 and a message when missing username or body', async () => {
+      let res = await request(server)
+          .post('/api/auth/login')
+          .send({});
+      expect(res.status).toBe(400);
+      res = await request(server)
+        .post('/api/auth/login')
+        .send({
+          username: 'test'
+        });
+      expect(res.status).toBe(400);
+      res = await request(server)
+        .post('/api/auth/login')
+        .send({
+          password: '1234'
+        });
+      expect(res.status).toBe(400);
+      expect(res.body.message).toBe('username and password required');
+    });
+
     it('returns token', async () => {
       const res = await request(server)
             .post('/api/auth/login')
